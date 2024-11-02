@@ -66,7 +66,7 @@ parameter T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6;
 /* Stage Transition Logic */
 always @(posedge clk) begin
     if (!rst_n) begin           // Check if reset is asserted, if yes, put into a holding stage
-      IDLE <= 6;
+      stage <= IDLE;
     end
  	else begin                   // If reset is not asserted, do the stages sequentially
         if (stage == IDLE) begin        
