@@ -21,8 +21,10 @@ module tt_um_control_block (
 // Assign the inputs to wires
 wire [3:0] opcode = ui_in [3:0];
 
+
 // Assign Output //
 assign uo_out[2:0] = stage;
+assign uo_out[7:3] = 0;
 
 assign uio_oe = 8'hff;    // Configure the bidirectional pins to be all outputs
 //assign uio_oe = 8'b00;
