@@ -71,7 +71,6 @@ always @(posedge clk) begin
       stage <= 0;
     end
 
-    end
 end
 
 endmodule
