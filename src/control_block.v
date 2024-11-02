@@ -63,8 +63,8 @@ always @(posedge clk) begin
       stage <= 6;
     end
  	else begin                   // If reset is not asserted, do the stages sequentially
-      if (stage == 6) begin        
-          stage <= 0;
+        if (stage == 6) begin        
+            stage <= 0;
         end 
         else if (stage == T0 || stage == T1 || 
                  stage == T2 || stage == T3 || 

@@ -19,7 +19,7 @@ module tb ();
   reg ena = 1;
 
   reg [3:0] opcode;
-  wire [15:0] out_res; // disregard the first bit
+  wire [14:0] out_res; // disregard the first bit
   wire [7:0] uio_oe;
    wire [7:0] uio_in;
   
@@ -33,7 +33,7 @@ module tb ();
     .clk(clk), 
     .rst_n(resetn),
     .ui_in({4'b0000, opcode}),
-    .uo_out(out_res[15:8]),
+    .uo_out(out_res[14:8]),
     .uio_out(out_res[7:0]),
     .uio_oe(uio_oe),
     .ena(ena),
