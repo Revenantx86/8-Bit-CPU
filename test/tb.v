@@ -14,14 +14,15 @@ module tb ();
   end
 
   /// Init registers 
-  reg resetn;
   reg clk;
-  reg ena = 1;
-
-  reg [3:0] opcode;
-  wire [14:0] out_res; // disregard the first bit
+  reg rst_n;
+  reg ena;
+  reg [7:0] ui_in;
+  reg [7:0] uio_in;
+  
+  wire [7:0] uo_out;
+  wire [7:0] uio_out;
   wire [7:0] uio_oe;
-   wire [7:0] uio_in;
   
   tt_um_control_block uut(
      // Include power ports for the Gate Level test:
@@ -31,10 +32,10 @@ module tb ();
       `endif
      
     .clk(clk), 
-    .rst_n(resetn),
-    .ui_in({4'b0000, opcode}),
-    .uo_out(out_res[14:8]),
-    .uio_out(out_res[7:0]),
+    .rst_n(rst_n),
+    .ui_in(ui_in),
+    .uo_out(uo_out),
+    .uio_out(uio_out),
     .uio_oe(uio_oe),
     .ena(ena),
     .uio_in(uio_in)

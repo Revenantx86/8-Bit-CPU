@@ -20,7 +20,13 @@ module tt_um_control_block (
 
 // Assign the inputs to wires
 wire [3:0] opcode = ui_in [3:0];
+
+// Assign Output //
+assign uo_out[2:0] = stage;
+
 assign uio_oe = 8'hff;    // Configure the bidirectional pins to be all outputs
+//assign uio_oe = 8'b00;
+assign uio_out = 8'hff;
 
 /* Supported Instructions' Opcodes */
 localparam OP_HLT = 4'h0;
@@ -78,26 +84,4 @@ always @(posedge clk) begin
     end
 end
 
-/* Micro-Operation Logic */
-always @(negedge clk) begin
-
-    if(!rst_n) begin
-        control_signals <= 0;
-    end
-    else begin
-        control_signals <= 0; // All signals are deasserted
-        case(stage)
-            T0: begin
-                control_signals <= 63;
-            end 
-        endcase
-    end
-end
-
-
-    //assign uo_out [7] = 0; // Assign this (not driving anything) to 0
-    assign uo_out [7:0] = control_signals[15:8];
-    //assign uio_out [7:0] = control_signals[7:0];
-    assign uio_out [2:0] = stage;
-    assign uio_out [7:3] = 0;
 endmodule
