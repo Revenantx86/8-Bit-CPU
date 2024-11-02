@@ -88,8 +88,8 @@ always @(negedge clk) begin
         control_signals <= 15'b000111111100011; // All signals are deasserted
         case(stage)
             T0: begin
-                control_signals[SIG_PC_EN] <= 1'b1;
-                control_signals[SIG_MAR_ADDR_LOAD_N] <= 1'b0;
+                control_signals[13] <= 1'b1;
+                control_signals[11] <= 1'b0;
             end 
         endcase
     end
