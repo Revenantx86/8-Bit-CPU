@@ -52,7 +52,7 @@ localparam SIG_OUT_LOAD_N = 0;          // \L_O
 
 /* Internal Regs */
 reg [2:0] stage;
-reg [14:0] control_signals;
+reg [15:0] control_signals;
 
 /* Micro-Operation Stages */
 parameter T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5; 
@@ -85,7 +85,7 @@ always @(negedge clk) begin
         control_signals <= 0;
     end
     else begin
-        control_signals <= 15'b000111111100011; // All signals are deasserted
+        control_signals <= 16'b000111111100011; // All signals are deasserted
         case(stage)
             T0: begin
                 control_signals[13] <= 1'b1;
@@ -96,8 +96,8 @@ always @(negedge clk) begin
 end
 
     wire _unused = &{ena, uio_in,  ui_in[7:4]};
-    assign uo_out [7] = 0; // Assign this (not driving anything) to 0
-    assign uo_out [6:0] = control_signals[14:8];
+    //assign uo_out [7] = 0; // Assign this (not driving anything) to 0
+    assign uo_out [7:0] = control_signals[15:8];
     //assign uio_out [7:0] = control_signals[7:0];
     assign uio_out [7:0] = 8'b0;
 endmodule
