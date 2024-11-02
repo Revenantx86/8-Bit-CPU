@@ -68,21 +68,9 @@ localparam T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6;
 /* Stage Transition Logic */
 always @(posedge clk) begin
     if (!rst_n) begin           // Check if reset is asserted, if yes, put into a holding stage
-      stage <= IDLE;
+      stage <= 0;
     end
- 	else begin                   // If reset is not asserted, do the stages sequentially
-        if (stage == IDLE) begin        
-            stage <= T0;
-        end 
-        else if (stage == T0 || stage == T1 || 
-                 stage == T2 || stage == T3 || 
-                 stage == T4 || stage == T5) begin
-            // Valid stages
-            stage <= stage + 1; // Increment to the next stage
-        end else begin
-            // If the stage is not valid, set it to 6
-            stage <= IDLE; // Set to stage 6 
-        end
+
     end
 end
 
