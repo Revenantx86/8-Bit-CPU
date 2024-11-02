@@ -63,7 +63,7 @@ reg [2:0] stage;
 reg [15:0] control_signals;
 
 /* Micro-Operation Stages */
-parameter T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6; 
+localparam T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6; 
 
 /* Stage Transition Logic */
 always @(posedge clk) begin
