@@ -85,10 +85,10 @@ always @(negedge clk) begin
         control_signals <= 0;
     end
     else begin
-        control_signals <= 16'b000111111100011; // All signals are deasserted
+        control_signals <= 0; // All signals are deasserted
         case(stage)
             T0: begin
-                control_signals <= 16'b000111001100000;
+                control_signals <= 63;
             end 
         endcase
     end
