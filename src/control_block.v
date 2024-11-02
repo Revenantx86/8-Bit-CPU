@@ -94,9 +94,10 @@ always @(negedge clk) begin
     end
 end
 
-    wire _unused = &{ena, uio_in,  ui_in[7:4]};
+
     //assign uo_out [7] = 0; // Assign this (not driving anything) to 0
     assign uo_out [7:0] = control_signals[15:8];
     //assign uio_out [7:0] = control_signals[7:0];
     assign uio_out [2:0] = stage;
+    assign uio_out [7:3] = 0;
 endmodule
