@@ -55,16 +55,16 @@ reg [2:0] stage;
 reg [15:0] control_signals;
 
 /* Micro-Operation Stages */
-parameter T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5; 
+parameter T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6; 
 
 /* Stage Transition Logic */
 always @(posedge clk) begin
     if (!rst_n) begin           // Check if reset is asserted, if yes, put into a holding stage
-      stage <= 6;
+      IDLE <= 6;
     end
  	else begin                   // If reset is not asserted, do the stages sequentially
-        if (stage == 6) begin        
-            stage <= 0;
+        if (stage == IDLE) begin        
+            stage <= T0;
         end 
         else if (stage == T0 || stage == T1 || 
                  stage == T2 || stage == T3 || 
@@ -73,7 +73,7 @@ always @(posedge clk) begin
             stage <= stage + 1; // Increment to the next stage
         end else begin
             // If the stage is not valid, set it to 6
-            stage <= 6; // Set to stage 6 
+            stage <= IDLE; // Set to stage 6 
         end
     end
 end
@@ -98,5 +98,5 @@ end
     //assign uo_out [7] = 0; // Assign this (not driving anything) to 0
     assign uo_out [7:0] = control_signals[15:8];
     //assign uio_out [7:0] = control_signals[7:0];
-    assign uio_out [7:0] = 8'b0;
+    assign uio_out [2:0] = stage;
 endmodule
