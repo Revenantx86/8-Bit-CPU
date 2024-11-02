@@ -164,6 +164,6 @@ end
     wire _unused = &{ena, uio_in,  ui_in[7:4]};
     assign uo_out [7] = 0; // Assign this (not driving anything) to 0
     assign uo_out [6:0] = control_signals[14:8];
-    assign uio_out [7:0] = control_signals[7:0];
-
+    //assign uio_out [7:0] = control_signals[7:0];
+    assign uio_out [7:0] = 8'b0;
 endmodule
