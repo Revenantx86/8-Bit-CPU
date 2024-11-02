@@ -70,6 +70,10 @@ always @(posedge clk) begin
     if (!rst_n) begin           // Check if reset is asserted, if yes, put into a holding stage
       stage <= 0;
     end
+    else begin
+        stage <= stage + 1;
+
+    end
 
 end
 
