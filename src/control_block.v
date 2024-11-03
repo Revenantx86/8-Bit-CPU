@@ -23,8 +23,8 @@ wire [3:0] opcode = ui_in [3:0];
 
 
 // Assign Output //
-assign uo_out[2:0] = stage;
-assign uo_out[7:3] = 0;
+assign uo_out[7:0] = stage;
+//assign uo_out[7:3] = 0;
 
 assign uio_oe = 8'hff;    // Configure the bidirectional pins to be all outputs
 //assign uio_oe = 8'b00;
@@ -39,7 +39,6 @@ localparam OP_LDA = 4'h4;
 localparam OP_OUT = 4'h5;
 localparam OP_STA = 4'h6;
 localparam OP_JMP = 4'h7;
-
 
 /* Output Control Signals */
 localparam SIG_PC_INC = 14;             // C_P
@@ -59,20 +58,20 @@ localparam SIG_REGB_LOAD_N = 1;         // \L_B
 localparam SIG_OUT_LOAD_N = 0;          // \L_O
 
 /* Internal Regs */
-reg [2:0] stage;
-reg [15:0] control_signals;
+reg [7:0] stage;
+//reg [15:0] control_signals;
 
 /* Micro-Operation Stages */
-localparam T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6; 
+//localparam T0 = 0, T1 = 1, T2 = 2, T3 = 3, T4 = 4, T5 = 5, IDLE = 6; 
 
 /* Stage Transition Logic */
 always @(posedge clk) begin
-    if (!rst_n) begin           // Check if reset is asserted, if yes, put into a holding stage
-      stage <= 0;
+    //
+    if(rst_n == 0)begin
+        stage <= 0;
     end
     else begin
-        stage <= stage + 1;
-
+        stage <= stage +1; 
     end
 
 end

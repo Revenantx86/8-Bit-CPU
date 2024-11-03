@@ -15,9 +15,12 @@ async def test_project(dut):
     cocotb.start_soon(clock.start())
 
     # Reset
-    dut.rst_n.vaue = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 0  # Fixed typo here
     dut._log.info("Reset")
-    await ClockCycles(dut.clk, 30)
+    await ClockCycles(dut.clk, 1000)
     dut.rst_n.value = 1
 
     dut._log.info("Test NOP")
@@ -50,4 +53,4 @@ async def test_project(dut):
 
     dut._log.info("Test HLT")
     dut.ui_in.value = 0
-    await ClockCycles(dut.clk, 1000) 
+    await ClockCycles(dut.clk, 1000)
